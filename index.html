@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculandoIMC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="jquery-3.6.1.min.js"></script>
+
+</head>
+
+<body >
+
+
+
+    <section>
+
+
+        <h1 style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 50px;">IMC</h1>
+        <!-- entrada de valores -->
+        <label> Peso:</label><br>
+        <input type="number" id="peso" placeholder="peso...KG"><br>
+        <label> Altura:</label><br>
+        <input type="number" id="altura" placeholder="altura...M">
+        <br><br>
+
+        <!-- displey de resposta -->
+        <input type="text" id="resposta"> <br><br>
+        <input type="text" id="msg"> <br><br>
+        <!-- butao de calculo -->
+        <button  id="botao">calcular</button><br>
+      
+        <!-- <button  class="a"></button> -->
+        
+    </section>
+
+    <!-- funcoes -->
+    <script>
+
+        let form = document.getElementById("botao");
+        form.addEventListener("click", calcular);
+
+        function calcular() {
+            let peso = document.getElementById("peso").value;
+            let altura = document.getElementById("altura").value;
+            // calculando o imc
+            var imc = peso / (altura * altura);
+            //arredondamento
+            arr = imc.toFixed(1);
+            //conversáo para float
+            imc = parseFloat(arr);
+            // condicoes para o imc
+            let cor = " ";
+
+            if (imc < 18.5) {
+                msg = "SUBPESO!"
+                cor = "blue"
+            }
+
+            else if (imc >= 18.5 && imc < 25) {
+                msg = "NORMAL!"
+                cor = "green"
+            }
+
+        
+            else if (imc >= 25 && imc < 30) {
+                msg = "SOBREPESO!"
+                cor = "#FFD700"
+            }
+            else if (imc > 30 && imc <= 35) {
+                msg = "OBESIDADE I!"
+                cor = "#FFA500"
+            }
+            else if (imc > 35 && imc <= 40) {
+                msg = "OBESIDADE II!"
+                cor = "#FF8C00"
+            }
+            
+            else if (imc > 40) {
+                msg = "OBESIDADE III!";
+                cor = "red";
+            }
+            else { msg = "CAMPO VAZIO!" 
+                      cor ="yellow"}
+
+            let elem_resposta = document.getElementById("msg");
+            let calculo = "IMC :  " + imc;
+
+            // retornar campo vazio
+            document.getElementById("peso").value = "";
+            document.getElementById("altura").value = "";
+            // resultado das operacoes
+            document.getElementById("resposta").value = calculo;
+            document.getElementById("msg").value = msg;
+            elem_resposta.style.background = cor;
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
